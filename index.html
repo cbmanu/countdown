@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Madurai&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>My Timer</title>
+</head>
+<body>
+
+<div class="edit-table">
+    <h2>Exercise time</h2>
+    <div class="col">
+        <p>Minutes</p>
+        <div class="inputs"><span>&lt</span><input type="number" id="minutesExercise" name="quantity" min="0" placeholder="Minutes"><span>&gt</span></div>
+    </div>
+    <div class="col">
+        <p>Seconds</p>
+        <div class="inputs"><span>&lt</span><input type="number" id="secondsExercise" name="quantity" min="0" max="59" placeholder="Seconds"><span>&gt</span></div>
+    </div>
+    <h2>Rest time</h2>
+    <div class="col">
+        <p>Minutes</p>
+        <div class="inputs"><span>&lt</span><input type="number" id="minutesRest" name="quantity" min="0" placeholder="Minutes"><span>&gt</span></div>
+    </div>
+    <div class="col">
+        <p>Seconds</p>
+        <div class="inputs"><span>&lt</span><input type="number" id="secondsRest" name="quantity" min="0" max="59" placeholder="Seconds"><span>&gt</span></div>
+    </div>
+
+    <button class="submit">submit</button>
+
+</div>
+
+
+<div class="chronometer">
+    <h1>Countdown</h1>
+    <div class="timer">30</div>
+    <button id="edit">Edit</button>
+    <button id="start">Start</button>
+    <button id="restart">Restart</button>
+</div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
