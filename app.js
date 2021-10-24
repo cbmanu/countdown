@@ -17,44 +17,64 @@ restart.addEventListener('click',()=>{
     
 })
 
+function show(){
+    editTable.classList.toggle('mostrar')
+}
+
 submit.addEventListener('click',()=>{
-    checkMinuteE()
-    checkMinuteR()
-    checkSecondsE()
-    checkSecondsR()
+    show();
+    checkMinuteE();
+    checkMinuteR();
+    checkSecondsE();
+    checkSecondsR();
     timeE = minutesE * 60 + secondsE;
     timeR = minutesR * 60 + secondsR;
-    console.log(timeE)
-    console.log(timeR)
-    editTable.classList.toggle('mostrar')
+    console.log(`${timeE},${timeR}`)
 })
 
 
 edit.addEventListener('click',function(){
-    editTable.classList.toggle('mostrar')
+    show();
 });
 start.addEventListener('click',function(){
     setInterval(time,1000)
             function time(){
-
                 if(timeE > 0 ){
-                    myTime.innerHTML = `${minutesE}:${secondsE}`;
+                    if (Math.floor(timeE/60) < 10 && Math.floor(timeE%60) <10) {
+                    myTime.innerHTML = `0${Math.floor(timeE/60)}:0${Math.floor(timeE%60)}`;
                     timeE--;
-                    checkMinuteE()
+                    }
+                    else if(Math.floor(timeE/60) < 10 && Math.floor(timeE%60) > 10){
+                        myTime.innerHTML = `0${Math.floor(timeE/60)}:${Math.floor(timeE%60)}`;
+                        timeE--;
+                    }
+                    else{
+                        myTime.innerHTML = `${Math.floor(timeE/60)}:${Math.floor(timeE%60)}`;
+                        timeE--;
+                    }
                 }
                 else if(timeE == 0){
                     alarm.play();
                     timeE--
                 }
                 else if(timeE == -1 && timeR > 0){
-                    myTime.innerHTML = `${minutesE}:${secondsE}`;
-                    timeR--
-                    checkMinuteR();
+                    if (Math.floor(timeR/60) < 10 && Math.floor(timeR%60) <10) {
+                        myTime.innerHTML = `0${Math.floor(timeR/60)}:0${Math.floor(timeR%60)}`;
+                        timeR--;
+                        }
+                        else if(Math.floor(timeR/60) < 10 && Math.floor(timeR%60) > 10){
+                            myTime.innerHTML = `0${Math.floor(timeR/60)}:${Math.floor(timeR%60)}`;
+                            timeR--;
+                        }
+                        else{
+                            myTime.innerHTML = `${Math.floor(timeR/60)}:${Math.floor(timeR%60)}`;
+                            timeR--;
+                        }
                 }
                 else if(timeE == -1 && timeR == 0){
                     alarm.play();
-                    timeE + minutesE * 60 + secondsE;
-                    timeR + minutesR * 60 + secondsR;
+                    timeE =+ minutesE * 60 + secondsE;
+                    timeR =+ minutesR * 60 + secondsR;
                 }
             }
 })

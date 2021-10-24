@@ -45,6 +45,23 @@ body{
 .edit-table input{
 	width: 140px;
 }
+.x{ 
+	color: #fff; 
+	height: 50px; 
+	padding-top: 10px; 
+} 
+.x h3{
+	font-size: 1.8em;
+}
+.x span{
+	 cursor: pointer; 
+} 
+.x span:hover{ 
+	font-size: 1.3em;
+}
+.submit{
+	margin-top: 25px;
+}
 .inputs{
 	margin: auto;
 	width: 170px;
