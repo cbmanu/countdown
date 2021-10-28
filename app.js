@@ -1,12 +1,13 @@
 let myTime = document.querySelector('.timer');
 let restart = document.getElementById('restart')
-let start = document.getElementById('start');
+let start = document.querySelector('.start');
 let edit = document.getElementById('edit');
 let editTable = document.querySelector('.edit-table')
 let submit = document.querySelector('.submit')
+
 let alarm = new Audio('sounds/381382__coltonmanz__alarm.wav')
-let timeE;
-let timeR;
+let timeE = 30;
+let timeR = 5;
 let minutesE;
 let secondsE;
 let minutesR;
@@ -36,7 +37,17 @@ submit.addEventListener('click',()=>{
 edit.addEventListener('click',function(){
     show();
 });
-start.addEventListener('click',function(){
+
+
+
+start.addEventListener('click',function(e){
+    start.classList.replace('start','stop');
+    let end = document.querySelector('.stop')
+    start.textContent = ''
+    start.textContent = 'Stop'
+    end.addEventListener('click',()=>{
+        e.stopPropagation()
+    })
     setInterval(time,1000)
             function time(){
                 if(timeE > 0 ){
