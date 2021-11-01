@@ -1,11 +1,13 @@
 let editTable = document.querySelector('.edit-table')
 let submit = document.querySelector('.submit')
-let myTime = document.querySelector('.timer');
+let myTime = document.getElementById('timer');
 let restart = document.getElementById('restart')
 let start = document.getElementById('start');
 let edit = document.getElementById('edit');
 let end = document.getElementById('stop')
 let alarm = new Audio('sounds/381382__coltonmanz__alarm.wav')
+let timeE;
+let timeR;
 let minutesE;
 let secondsE;
 let minutesR;
