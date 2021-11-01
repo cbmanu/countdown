@@ -61,14 +61,11 @@ color: #111;
 	width:0;
 	overflow: hidden;
 }
-.edit-table h2,p{
+.edit-table h4,p{
 	color: #fff;
 	margin-top: 15px;
 }
-.edit-table span{
-	height: 24px;
-	width: 30px;
-}
+
 .edit-table input{
 	width: 170px;
 	border-radius: 3px;
@@ -77,8 +74,8 @@ color: #111;
 .title{ 
 	background-color: #484848;
 	color: #fff; 
-	height: 50px; 
-	padding: 10px; 
+	height: 100px; 
+	align-items: center;
 	font-size: 1.5em;
 	border-bottom: 1px solid #fff;
 } 
@@ -87,6 +84,7 @@ color: #111;
 }
 .title span{
 	 cursor: pointer; 
+	 line-height: 1px;
 } 
 .title span:hover{ 
 	font-size: 1.3em;
