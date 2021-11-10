@@ -18,7 +18,7 @@
         <h4>Exercise time</h4>
         <div class="col">
             <p>Minutes</p>
-            <div class="inputs"><input type="number" id="minutesExercise" onkeypress="return event.charCode >= 48" name="quantity" min="0" placeholder="Minutes"></div>
+            <div class="inputs"><input type="number" id="minutesExercise" onkeypress="return event.charCode >= 48" name="quantity" min="0" max="59" placeholder="Minutes"></div>
         </div>
         <div class="col">
             <p>Seconds</p>
@@ -27,25 +27,53 @@
         <h4>Rest time</h4>
         <div class="col">
             <p>Minutes</p>
-            <div class="inputs"><input type="number" id="minutesRest" onkeypress="return event.charCode >= 48" name="quantity" min="0" placeholder="Minutes"></div>
+            <div class="inputs"><input type="number" id="minutesRest" onkeypress="return event.charCode >= 48" name="quantity" min="0" max="59" placeholder="Minutes"></div>
         </div>
         <div class="col">
             <p>Seconds</p>
             <div class="inputs"><input type="number" id="secondsRest" onkeypress="return event.charCode >= 48" name="quantity" min="0" max="59" placeholder="Seconds"></div>
         </div>
-    
+        <div class="col">
+            <p>Cycles</p>
+            <select id="cycles">
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+            </select>
+        </div>
+        <div class="col" style="margin-top: 16px;">
+            <input id="checkbox" type="checkbox" name="checkbox">
+            <label for="checkbox">Half time alarm</label>
+        </div>
         <button class="btn btn-light submit">submit</button>
     
     </div>
-
 
 <div class="chronometer">
     <h1>Countdown</h1>
     <div id="timer">00:00</div>
     <button id="edit"><span>Edit</span></button>
-    <button id="start" class="text-center"><span>Start</span></button>
-    <button id="stop" ><span>Stop</span></button>
+    <button id="start"><span>Start</span></button>
+    <button id="stop"><span>Stop</span></button>
     <button id="restart"><span>Restart</span></button>
+</div>
+<div class="container-pb container-fluid">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated percent-loaded" role="progressbar" style="width:0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
 </div>
 
     <script src="app.js"></script>

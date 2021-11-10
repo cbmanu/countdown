@@ -5,7 +5,11 @@ let restart = document.getElementById('restart')
 let start = document.getElementById('start');
 let edit = document.getElementById('edit');
 let end = document.getElementById('stop')
-let alarm = new Audio('sounds/381382__coltonmanz__alarm.wav')
+let alarm = new Audio('sounds/381382__coltonmanz__alarm.wav');
+let checkbox = document.getElementById('checkbox');
+let cycles = document.getElementById('cycles');
+let percentLoaded = document.querySelector('.percent-loaded')
+let percentComplete = 0;
 let timeE;
 let timeR;
 let minutesE;
@@ -49,8 +53,8 @@ function show(){
 
 submit.addEventListener('click',()=>{
     show();
-    checkMinuteE();
-    checkMinuteR();
+    checkMinutesE();
+    checkMinutesR();
     checkSecondsE();
     checkSecondsR();
     timeE = minutesE * 60 + secondsE;
@@ -63,14 +67,23 @@ submit.addEventListener('click',()=>{
             myTime.innerHTML = `0${Math.floor(timeE/60)}:${Math.floor(timeE%60)}`;
             timeE--;
         }
+        else if(Math.floor(timeE/60) > 10 && Math.floor(timeE%60) < 10){
+            myTime.innerHTML = `${Math.floor(timeE/60)}:0${Math.floor(timeE%60)}`;
+            timeE--;
+        }
         else if(Math.floor(timeE/60) == 10 && Math.floor(timeE%60) < 10){
             myTime.innerHTML = `${Math.floor(timeE/60)}:0${Math.floor(timeE%60)}`;
+            timeE--;
+        }
+        else if(Math.floor(timeE/60) < 10 && Math.floor(timeE%60) == 10){
+            myTime.innerHTML = `0${Math.floor(timeE/60)}:${Math.floor(timeE%60)}`;
             timeE--;
         }
         else{
             myTime.innerHTML = `${Math.floor(timeE/60)}:${Math.floor(timeE%60)}`;
             timeE--;
         }
+
 })
 
 
@@ -79,7 +92,21 @@ edit.addEventListener('click',function(){
 });
 
 function time(){
+    if(timesCycles == cycles.value){
+        clearInterval(tick);
+        end.style.display = 'none'
+        start.style.display = 'inline-block'
+    }
     if(timeE > 0 ){
+        if (checkbox.checked) {
+            if (minutesE * 60 + secondsE > 1) {
+                let halfTime = minutesE * 60 + secondsE/2;
+                if (Math.floor(halfTime) == timeE){
+                    alarm.play();
+                } 
+            }
+        }
+
         if (Math.floor(timeE/60) < 10 && Math.floor(timeE%60) <10) {
         myTime.innerHTML = `0${Math.floor(timeE/60)}:0${Math.floor(timeE%60)}`;
         timeE--;
@@ -88,8 +115,16 @@ function time(){
             myTime.innerHTML = `0${Math.floor(timeE/60)}:${Math.floor(timeE%60)}`;
             timeE--;
         }
+        else if(Math.floor(timeE/60) > 10 && Math.floor(timeE%60) < 10){
+            myTime.innerHTML = `${Math.floor(timeE/60)}:0${Math.floor(timeE%60)}`;
+            timeE--;
+        }
         else if(Math.floor(timeE/60) == 10 && Math.floor(timeE%60) < 10){
             myTime.innerHTML = `${Math.floor(timeE/60)}:0${Math.floor(timeE%60)}`;
+            timeE--;
+        }
+        else if(Math.floor(timeE/60) < 10 && Math.floor(timeE%60) == 10){
+            myTime.innerHTML = `0${Math.floor(timeE/60)}:${Math.floor(timeE%60)}`;
             timeE--;
         }
         else{
@@ -110,8 +145,16 @@ function time(){
                 myTime.innerHTML = `0${Math.floor(timeR/60)}:${Math.floor(timeR%60)}`;
                 timeR--;
             }
+            else if(Math.floor(timeR/60) > 10 && Math.floor(timeR%60) < 10){
+                myTime.innerHTML = `${Math.floor(timeR/60)}:0${Math.floor(timeR%60)}`;
+                timeR--;
+            }
             else if(Math.floor(timeR/60) == 10 && Math.floor(timeR%60) < 10){
                 myTime.innerHTML = `${Math.floor(timeR/60)}:0${Math.floor(timeR%60)}`;
+                timeR--;
+            }
+            else if(Math.floor(timeR/60) < 10 && Math.floor(timeR%60) == 10){
+                myTime.innerHTML = `0${Math.floor(timeR/60)}:${Math.floor(timeR%60)}`;
                 timeR--;
             }
             else{
@@ -123,6 +166,15 @@ function time(){
         alarm.play();
         timeE =+ minutesE * 60 + secondsE;
         timeR =+ minutesR * 60 + secondsR;
+        if (cycles.value > 0) {
+            let cyclesProgress = 100/cycles.value;
+            percentComplete = percentComplete + cyclesProgress;
+            percentLoaded.setAttribute("aria-valuenow", percentComplete)
+            percentLoaded.style.width = `${percentComplete}%`
+            percentLoaded.textContent = `${Math.floor(percentComplete)}%`;
+            timesCycles++
+        }
+
     }
 }
 
@@ -132,14 +184,25 @@ end.addEventListener('click',()=>{
     start.style.display = 'inline-block'
     })
 start.addEventListener('click',function(){
+    if(cycles.value > 0){
+         timesCycles = 0;
+    }
+    if (percentLoaded.textContent == '100%') {
+        percentComplete = 0;
+        percentLoaded.setAttribute("aria-valuenow", 0)
+        percentLoaded.style.width = `0`
+        percentLoaded.textContent = `0`;
+        timesCycles = 0
+    }
     tick = setInterval(time,1000)
     start.style.display = 'none'
     end.style.display = 'inline-block'
+
 })
 
 
 
-    function checkMinuteE(){
+    function checkMinutesE(){
     minutesE = document.getElementById('minutesExercise').value;
     secondsE = document.getElementById('secondsExercise').value;
         if(minutesE == ''){
@@ -160,7 +223,7 @@ start.addEventListener('click',function(){
         secondsE = timeE % 60
         return secondsE
     }
-    function checkMinuteR(){
+    function checkMinutesR(){
         minutesR = document.getElementById('minutesRest').value;
         secondsR = document.getElementById('secondsRest').value;
 
