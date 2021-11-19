@@ -1,3 +1,4 @@
+
 let editTable = document.querySelector('.edit-table')
 let submit = document.querySelector('.submit')
 let myTime = document.getElementById('timer');
@@ -10,6 +11,7 @@ let checkbox = document.getElementById('checkbox');
 let cycles = document.getElementById('cycles');
 let percentLoaded = document.querySelector('.percent-loaded')
 let percentComplete = 0;
+let progressBar = document.querySelector('.progress')
 let timeE;
 let timeR;
 let minutesE;
@@ -83,6 +85,9 @@ submit.addEventListener('click',()=>{
             myTime.innerHTML = `${Math.floor(timeE/60)}:${Math.floor(timeE%60)}`;
             timeE--;
         }
+        if (cycles.value > 0) {
+            progressBar.classList.remove('d-none')
+        }
 
 })
 
@@ -92,11 +97,6 @@ edit.addEventListener('click',function(){
 });
 
 function time(){
-    if(timesCycles == cycles.value){
-        clearInterval(tick);
-        end.style.display = 'none'
-        start.style.display = 'inline-block'
-    }
     if(timeE > 0 ){
         if (checkbox.checked) {
             if (minutesE * 60 + secondsE > 1) {
@@ -173,6 +173,11 @@ function time(){
             percentLoaded.style.width = `${percentComplete}%`
             percentLoaded.textContent = `${Math.floor(percentComplete)}%`;
             timesCycles++
+            if(timesCycles == cycles.value){
+                clearInterval(tick);
+                end.style.display = 'none'
+                start.style.display = 'inline-block'
+            }
         }
 
     }
@@ -194,7 +199,7 @@ start.addEventListener('click',function(){
         percentLoaded.textContent = `0`;
         timesCycles = 0
     }
-    tick = setInterval(time,1000)
+     tick = setInterval(time,1000)
     start.style.display = 'none'
     end.style.display = 'inline-block'
 
