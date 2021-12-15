@@ -100,7 +100,7 @@ function time(){
     if(timeE > 0 ){
         if (checkbox.checked) {
             if (minutesE * 60 + secondsE > 1) {
-                let halfTime = minutesE * 60 + secondsE/2;
+                let halfTime = ((minutesE * 60) + secondsE)/2;
                 if (Math.floor(halfTime) == timeE){
                     alarm.play();
                 } 
